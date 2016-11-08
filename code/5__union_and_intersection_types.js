@@ -9,13 +9,23 @@
 type Smurf = {
     name: string,
     age: number,
-    isAwake: true // TODO: zombie ???
+    status: 'awake' | 'asleep' | 'zombie',
 }
+
+// const papaSmurf: Smurf = { name: "Papa Smurf", age: 300, status: 'awake' };
+const smurfette: Smurf = { name: "Smurfette", age: 150, status: 'zombie' };
 
 type Spell = string
 
-// type Wizard =
+type Wizard = {
+    spells: Spell[]
+}
 
-// type SmurfWizard =
+type SmurfWizard = Smurf & Wizard;
 
-// const papaSmurf =
+const papaSmurf : SmurfWizard = {
+    name: "Papa Smurf",
+    age: 300,
+    status: 'awake',
+    spells: ['fireball', 'sleep'],
+};

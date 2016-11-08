@@ -16,6 +16,11 @@ type Smurf = {
 const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
 const smurfette = { name: "Smurfette", age: 150, isAwake: false };
 
-// function mkSmurf() {
-
-// }
+function mkSmurf(value: mixed): Smurf {
+    if (typeof value === 'string') {
+        return { name: value, age: 100, isAwake: true};
+    } else if (typeof value === 'number') {
+        return { name: 'Smurf', age: 100, isAwake: true};
+    }
+    throw new Error('Dude ???');
+}

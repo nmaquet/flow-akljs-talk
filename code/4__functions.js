@@ -13,12 +13,16 @@ type Smurf = {
 }
 
 const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
-const smurfette = { name: "Smurfette", age: 150, isAwake: false};
+const smurfette = { name: "Smurfette", age: 150, isAwake: false };
 
-// type SmurfMetric
+type SmurfMetric = (s: Smurf) => number;
 
-// function measureMetrics() {
-//
-//}
+function measure(smurf: Smurf, metrics: SmurfMetric[]): number[] {
+    const result = [];
+    for (const metric of metrics) {
+        result.push(metric(smurf));
+    }
+    return result;
+}
 
 //measureMetrics();

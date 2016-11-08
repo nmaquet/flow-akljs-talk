@@ -7,9 +7,15 @@
 
  */
 
-const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
+type Smurf = {
+    name: string,
+    age: number,
+    isAwake: boolean,
+}
 
-function toString(smurf) {
+const papaSmurf: Smurf = { name: "Papa Smurf", age: 300, isAwake: true };
+
+function toString(smurf: Smurf) {
     return `${smurf.name} is ${smurf.age} years old`;
 }
 

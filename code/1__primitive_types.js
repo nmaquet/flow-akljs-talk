@@ -12,7 +12,7 @@ Flow has all the Javascript primitive types:
 
  */
 
-const name: string = 'Papa Smurf';
+const name = 'Papa Smurf';
 
 const age: number = 300;
 
