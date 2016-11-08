@@ -174,7 +174,105 @@ measureMetrics(papaSmurf, [
 ]);</code></pre>
 </section>
 
+<section>
+          <pre><code class="javascript">/*
+ * any literal can be a type
+ * union: type T = T1 | T2 | ...
+ * intersection: type T = T1 & T2 & ...
+ */
+
+type Smurf = {
+    name: string,
+    age: number,
+    status: 'awake' | 'sleeping' | 'zombie',
+}
+
+type Spell = string
+
+type Wizard = {
+    spells: Spell[]
+}
+
+type SmurfWizard = Smurf & Wizard;
+
+const papaSmurf : SmurfWizard = {
+    name: "Papa Smurf",
+    age: 300,
+    status: 'awake',
+    spells: ["wingardium leviosa", "fireball"],
+};</code></pre></section>
+
+                <section>
+          <pre><code class="javascript">// @flow
+
+/*
+
+- any is a subtype and a supertype of all values
+- mixed is a supertype of all values, but a subtype of none
+
+ */
+
+
+import _ from 'lodash';
+
+type Smurf = {
+    name: string,
+    age: number,
+    isAwake: boolean
+}
+
+const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
+const smurfette = { name: "Smurfette", age: 150, isAwake: false};
+
+function mkSmurf(arg: mixed): Smurf {
+
+    if (typeof arg === 'string') {
+        return { name: arg, age: 300, isAwake: true };
+    }
+
+    if (typeof arg === 'number') {
+        return { name: "Smurf", age: arg, isAwake: true };
+    }
+
+    if (typeof arg === 'boolean') {
+        return { name: "Smurf", age: 300, isAwake: arg};
+    }
+
+    throw new Error("invalid argument", arg);
+}
+</code></pre></section>
+
+                <section>
+          <pre><code class="javascript">/*
+
+ { foo? : T } is optionally T, meaning T | void
+ { foo : ?T } is maybe T, meaning T | null | void
+
+  No sugar for `T | null`, but easy enough to type anyway
+
+ */
+
+type Smurf = { name: string, age: ?number };
+
+const papa: Smurf = { name: "Papa Smurf", age: 300 };
+const smurfette: Smurf = { name: "Smurfette", age: 200 };
+
+function toString(smurf: Smurf, suffix: string = "") {
+    if (smurf.age == null) {
+        return `${smurf.name} is immortal ${suffix}`;
+    }
+    return `${smurf.name} is ${smurf.age} years old ${suffix}`;
+}
+
+const x: number | null = 42;
+</code></pre></section>
+
+
     <section>
+        <h1>And now for some<br>real-world Flow code</h1>
+    </section>
+
+                <section>
       <h1>Thanks!</h1>
     </section>
 
