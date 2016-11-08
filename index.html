@@ -46,193 +46,133 @@
                     <p><em>(upcoming)</em> &nbsp; &nbsp; <code>http://movio.co/blog</code></p>
 				</section>
 
-        <!--
         <section>
-          <h2>One global Redux store</h2>
-          <pre><code class="javascript">
-  const store = Redux.createStore(…);
-          </code></pre>
-        </section>
-        -->
-
-        <section>
-          <h3>JSON schema</h3>
-          <pre><code class="javascript">{
-  "type": "object",
-  "patternProperties": {
-    "^todo[0-9]+$": {
-      "type": "object",
-      "properties": {
-        "title": { "type": "string" },
-        "completed": { "type": "boolean" }
-      },
-      "required": [ "title", "completed" ],
-      "additionalProperties": false
-    }
-  },
-  "additionalProperties": false
-}</code></pre>
+            <h1>What is Flow?</h1>
+            <ul>
+                <li>Static type checker for JavaScript (ES5, ES6, ES7+)</li>
+                <li>Created and open-sourced by Facebook in November 2014</li>
+                <li>Used internally by Facebook projects <a href="https://github.com/facebook/react/blob/c78464f8ea9a5b00ec80252d20a71a1482210e57/src/renderers/shared/stack/reconciler/ReactNodeTypes.js">including React</a></li>
+                <li>Similar in nature to Microsoft's TypeScript</li>
+                <li>Written in OCaml</li>
+            </ul>
         </section>
 
         <section>
-          <h3>JSON Schema Specs</h3>
-          <a href="http://json-schema.org/"><code>http://json-schema.org/</code></a>
-          <br><br>
-          <h3>JSON Schema Practical Guide</h3>
-          <a href="https://spacetelescope.github.io/understanding-json-schema/"><code>https://spacetelescope.github.io/understanding-json-schema/</code></a>
-          <br><br>
-          <h3>Online Validator</h3>
-          <a href="http://www.jsonschemavalidator.net/"><code>http://www.jsonschemavalidator.net/</code></a>
+            <h1>Static typing?<br>for JavaScript?</h1>
+            <img src="http://vignette2.wikia.nocookie.net/smurfs/images/d/d7/819028-grouchy_large.jpg/revision/latest?cb=20130624233208">
         </section>
 
         <section>
-          <code>https://github.com/tdegrunt/jsonschema</code>
-          <pre><code class="bash">npm install --save jsonschema</code></pre>
-        </section>
-
-      <section>
-          <h3>State validation function</h3>
-					<pre><code class="javascript">import invariant from 'invariant';
-import { Validator } from 'jsonschema';
-import stateSchema from 'json!stateSchema.json';
-
-const validator = new Validator();
-
-export function validateState(state) {
-  if (__DEV__) {
-    const validation = validator.validate(obj, stateSchema);
-    invariant(validation.valid, `invalid state: ${validation}`);
-  }
-  return state;
-}</code></pre>
-
-      </section>
-
-      <section>
-        <h3>Self-validating reducer</h3>
-
-        <pre><code class="javascript">import validateState from './validateState';
-
-export function reducer(state, action) {
-  return validateState(
-    …
-  );
-}</code></pre>
-      </section>
-
-        <section>
-          <h2 style="color: #ff2c2d">Tip #2</h2>
-          <h1>Use middleware for cross-reducer validation</h1>
+            <h1>The bad news...</h1>
+            <ul>
+                <li>large codebases</li>
+                <li>complex application logic</li>
+                <li>large or multiple teams</li>
+                <li>long project lifespan</li>
+                <li>...</li>
+            </ul>
+            <br>
+            <br>
+            <span style="color: #ff2c2d;">Static typing tends to pay off in this context</span>
+            <br>
+            <span style="color: #ff2c2d;">... so we should probably look into it.</span>
         </section>
 
         <section>
-          <h3>Cross-reducer validation</h3>
-          <ul>
-            <li>individual reducer schemas </li>
-            <li>also need to check for inconsistent data across reducers</li>
-          </ul>
-          <pre><code class="javascript">function checkState() {
-  //  check for orphaned data
-  //  check for inconsistent data
-  …
+            <h1>The good news!</h1>
+            <ul>
+                <li>Flow code looks and feels like JavaScript</li>
+                <li>Flow types are never mandatory</li>
+                <li>Flow code and regular JavaScript interact without issue</li>
+                <li>Flow is FAST</li>
+                <li>Flow is not part of your build pipeline (1 Babel plugin)</li>
+                <li>Flow does not prevent code execution</li>
+                <li>Flow has no runtime impact overhead</li>
+            </ul>
+        </section>
+
+        <section>
+          <h1>DEMO</h1>
+        </section>
+
+        <section>
+          <pre><code class="javascript">/* Flow has all the JavaScript primitive types:
+
+* string
+* number (includes NaN and Infinity)
+* boolean
+* null
+* void (a.k.a undefined)
+*/
+
+const name: string = 'Papa Smurf';
+
+const age: number = 300;
+
+const heightInApples: number = 3;
+
+const isAwake: boolean = true;</code></pre>
+        </section>
+
+        <section>
+          <pre><code class="javascript">/*
+* Structural typing for objects
+* Type aliases
+*/
+
+type Smurf = { name: string, age: number, isAwake: boolean };
+
+const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
+
+function toString(smurf: Smurf): string {
+    return `${smurf.name} is ${smurf.age} years old`;
 }
 
-export default function checkStateMiddleware({ getState }) {
-  return (next) => (action) => {
-    const returnValue = next(action);
-    checkState(getState());
-    return returnValue;
-  };
-};</code></pre>
-        </section>
+toString(papaSmurf);</code></pre>
+                </section>
+                <section>
+          <pre><code class="javascript">/*
+* either T[]
+* or Array&lt;T&gt;
+*/
 
-        <section>
-          <h2 style="color: #ff2c2d">Tip #3</h2>
-          <h1>Dispatch reducer exceptions as actions</h1>
-        </section>
+type Smurf = { name: string, age: number, isAwake: boolean };
 
-        <section>
-          <h3>Catch & Dispatch Exceptions</h3>
-          <pre><code class="javascript">const catchExceptions = (getStore) => (reducer) => (state, action) => {
-  try {
-    return reducer(state, action);
-  } catch (e) {
-    if (state === undefined) {
-      // don't dispatch if exception occurs during initialization
-      throw e;
-    }
-    console.error(e);
-    // use setTimeout to avoid recursive call to dispatch()
-    setTimeout(() =>
-      getStore().dispatch({type: 'REDUCER_ERROR', exception: e })
-    );
-    return state;
-  }
+const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
+const smurfette = { name: "Smurfette", age: 150, isAwake: false };
+
+const smurfs: Smurf[] = [papaSmurf, smurfette];
+
+function sumOfAges(smurfs: Array&lt;Smurf&gt;): number {
+    return smurfs.reduce((sum, smurf) => sum + smurf.age, 0);
 }</code></pre>
-<pre class="fragment"><code class="javascript">const store = Redux.createStore(catchExceptions(() => store)(
-  Redux.combineReducers({
-    foo: fooReducer,
-    bar: barReducer,
-    …
-  })
-));</code></pre>
-        </section>
+                </section>
 
-        <section>
-          <h2 style="color: #ff2c2d">Tip #4</h2>
-          <h1>Use middleware for cross-cutting concerns</h1>
-        </section>
+<section>
+          <pre><code class="javascript">/*
+ Function types are (arg1: T1, arg2: T2, ...) => T
+ */
 
-        <section>
-          <h3>Cross-cutting concerns</h3>
-          <ul>
-            <li>alerting</li>
-            <li>logging</li>
-            <li>error management</li>
-            <li>analytics</li>
-          </ul>
-          <br><br><br>
-          <small><code>http://redux.js.org/docs/advanced/Middleware.html</code></small>
-        </section>
+type Smurf = { name: string, age: number, isAwake: boolean };
 
-        <section>
-          <h3>Alerting middleware</h3>
-          <pre><code class="javascript">export default function alertMiddleware({ getState }) {
-  return (next) => (action) => {
-    switch(action.type) {
-      case "SAVE_SUCCEEDED":
-        Alert.success('Todos saved');
-        break;
-      case "SAVE_FAILED":
-        Alert.error(`Could not save todos: ${action.error}`);
-        break;
-      case "REDUCER_ERROR":
-        Alert.error(`Unexpected error: ${action.error}`);
-        break;
+const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
+const smurfette = { name: "Smurfette", age: 150, isAwake: false};
+
+type SmurfMetric = (s: Smurf) => number
+
+function measure(smurf: Smurf, metrics: SmurfMetric[]): number[] {
+    let result = [];
+    for (const metric of metrics) {
+        result.push(metric(smurf));
     }
-    return next(action);
-  };
-};</code></pre>
-        </section>
+    return result;
+}
 
-        <section>
-          <h3>UX Analytics Middleware</h3>
-          <pre><code class="javascript">const trackedActionTypes = [
-  "SAVE_TODOS",
-  "COMPLETE_TODO",
-  "CREATE_TODO"
-];
-
-export default function heapAnalyticsMiddleware({ getState }) {
-  return (next) => (action) => {
-    if (_.includes(trackedActionTypes, action.type) {
-       heap.track(action.type);
-    }
-    return next(action);
-  };
-};</code></pre>
-      </section>
-		</div>
+measureMetrics(papaSmurf, [
+  (s) => s.name.length,
+  (s) => Math.pow(s.age,2)
+]);</code></pre>
+</section>
 
     <section>
       <h1>Thanks!</h1>
