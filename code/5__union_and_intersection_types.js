@@ -9,20 +9,13 @@
 type Smurf = {
     name: string,
     age: number,
-    status: 'awake' | 'sleeping' | 'zombie',
+    isAwake: true // TODO: zombie ???
 }
 
 type Spell = string
 
-type Wizard = {
-    spells: Spell[]
-}
+// type Wizard =
 
-type SmurfWizard = Smurf & Wizard;
+// type SmurfWizard =
 
-const papaSmurf : SmurfWizard = {
-    name: "Papa Smurf",
-    age: 300,
-    status: 'awake',
-    spells: ["wingardium leviosa", "fireball"],
-};
+// const papaSmurf =

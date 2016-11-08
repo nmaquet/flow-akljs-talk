@@ -16,8 +16,8 @@ type Smurf = {
 const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
 const smurfette = { name: "Smurfette", age: 150, isAwake: false};
 
-const smurfs: Smurf[] = [papaSmurf, smurfette];
+// const smurfs
 
-function sumOfAges(smurfs: Array<Smurf>): number {
-    return smurfs.reduce((sum, smurf) => sum + smurf.age, 0);
-}
+// function sumOfAges() {
+//
+// }

@@ -7,9 +7,6 @@
 
  */
 
-
-import _ from 'lodash';
-
 type Smurf = {
     name: string,
     age: number,
@@ -17,21 +14,8 @@ type Smurf = {
 }
 
 const papaSmurf = { name: "Papa Smurf", age: 300, isAwake: true };
-const smurfette = { name: "Smurfette", age: 150, isAwake: false};
+const smurfette = { name: "Smurfette", age: 150, isAwake: false };
 
-function mkSmurf(arg: mixed): Smurf {
+// function mkSmurf() {
 
-    if (typeof arg === 'string') {
-        return { name: arg, age: 300, isAwake: true };
-    }
-
-    if (typeof arg === 'number') {
-        return { name: "Smurf", age: arg, isAwake: true };
-    }
-
-    if (typeof arg === 'boolean') {
-        return { name: "Smurf", age: 300, isAwake: arg};
-    }
-
-    throw new Error("invalid argument", arg);
-}
+// }
