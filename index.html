@@ -27,11 +27,11 @@
 
 				<section>
 					<h1>
-						Useful Tips for<br>
-						Real-World Redux<br>
-            <img style="border:none; background-color: white; padding: 20px"
-                 src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png" width="130" height="120">
+						Introduction to
+            <img style="border:none; padding: 20px"
+                 src="https://raw.githubusercontent.com/facebook/flow/ba730fa49833dbc71a2d1a4debaaa903c68aa76b/website/_assets/images/flow-hero-logo.png">
 					</h1>
+                    <p><a href="https://flowtype.org/"><code>https://flowtype.org/</code></a></p>
 
 				</section>
 
@@ -42,120 +42,18 @@
 					<p><code>github.com/nmaquet</code></p>
 					<br/>
 					<h4>Slides & Blog Post</h4>
-          <p><code>https://nmaquet.github.io/redux-akljs-talk</code></p>
-          <p><code>http://movio.co/blog</code></p>
+          <p><code>https://nmaquet.github.io/flow-akljs-talk</code></p>
+                    <p><em>(upcoming)</em> &nbsp; &nbsp; <code>http://movio.co/blog</code></p>
 				</section>
 
-        <section>
-          <h2 style="text-transform: none"><code> &ltReduxIntro&gt; </code></h2>
-        </section>
-
+        <!--
         <section>
           <h2>One global Redux store</h2>
           <pre><code class="javascript">
   const store = Redux.createStore(…);
           </code></pre>
         </section>
-
-        <section>
-          <h2>The store contains one state object</h2>
-          <pre><code class="javascript">
-  store.getState();
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>The UI dispatches actions to the store</h2>
-          <pre><code class="javascript">
-  const Todo = ({ id, text, completed }) => (
-     &lt;p
-       style={{textDecoration: completed ? 'line-through' : 'none'}}
-       onClick={() => store.dispatch({ type: 'TOGGLE_TODO', id })}
-     &gt;
-       {text}
-     &lt;/p&gt;
-  )
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>The UI subscribes to store updates</h2>
-          <h2>and re-renders using the global state</h2>
-          <pre><code class="javascript">
-  function render() {
-    ReactDOM.render(
-      &lt;App state={store.getState()} /&gt;,
-      document.getElementById('app')
-    );
-  }
-
-  render();
-  store.subscribe(render);
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>The State updates using <br>reducer functions</h2>
-          <pre><code class="javascript">
-  const initialState = … ;
-
-  function reducer (state, action) {
-    if (state === undefined) {
-      return initialState;
-    }
-    switch (action.type) {
-       … // return newly computed state
-    }
-  }
-          </code></pre>
-          <pre><code class="javascript">
-  const store = Redux.createStore(reducer);
-          </code></pre>
-        </section>
-
-        <section>
-          <img height="550" src="https://camo.githubusercontent.com/af8803571294fe373a54d039be8f9709f15a2ad4/687474703a2f2f6d616b6569746f70656e2e636f6d2f7374617469632f696d616765732f72656475785f666c6f7763686172742e706e67" />
-          <small><p>source: http://makeitopen.com/tutorials/building-the-f8-app/data/</p></small>
-        </section>
-
-        <section>
-          <h3>Redux Learning Resources</h3>
-          <div style="margin-left: -75px">
-            <p>Awesome resources by Dan Abramov (the Redux creator):</p>
-            <ul>
-              <small><li><code>http://redux.js.org/docs/introduction/index.html</code></li></small>
-              <small><li><code>https://egghead.io/courses/getting-started-with-redux</code></li></small>
-              <small><li><code>https://egghead.io/courses/building-react-applications-with-idiomatic-redux</code></li></small>
-            </ul>
-          </div>
-        </section>
-
-        <section>
-          <h2 style="text-transform: none"><code> &lt/ReduxIntro&gt; </code></h2>
-        </section>
-
-        <section>
-          <h2 style="color: #ff2c2d">Tip #1</h2>
-          <h1>Use JSON schema to validate the state</h1>
-        </section>
-
-        <section>
-          <h3>Redux state object</h3>
-          <pre><code class="javascript">{
-  "todo1": {
-    title: "learn React",
-    completed: true
-  },
-  "todo2": {
-    title: "learn Redux",
-    completed: true
-  },
-  "todo3": {
-    title: "write blog post",
-    completed: false
-  }
-}</code></pre>
-        </section>
+        -->
 
         <section>
           <h3>JSON schema</h3>
